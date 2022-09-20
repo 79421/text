@@ -12,7 +12,6 @@ import { ref, reactive } from 'vue'
 export default {
   name: 'HomeView',
   setup() {
-    // let num = 0
     let count = ref(100)
     const add = () => {
       // count.value++

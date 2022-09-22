@@ -1,49 +1,32 @@
 <template>
   <div class="home">
     <img alt="Vue logo" src="../assets/logo.png" @click="changeOne">
-    <!-- <div @click="goChild()">点我编程式跳转路由</div>
-    <div @click="goChild()">点我声明式跳转路由</div> -->
-    {{name}}
-    {{age}}
-    {{info.a}}
-    {{info.b}}
+    {{a.name}}
+    {{a.info.age}}
   </div>
 </template>
 
 <script>
-import { reactive, toRefs } from '@vue/reactivity'
-// import router from '@/router'
+import { reactive, readonly, toRefs } from '@vue/reactivity'
 //传递参数的页面
 export default {
-
   setup() {
-    let obj = reactive({
-      name: '张三',
-      age: 18,
-      info: {
-        a: 'aaaa',
-        b: 'bbbb'
+    let data = reactive({
+      name: "啾啾丸", info: {
+        age: 18
       }
     })
+    let a = readonly(data)
     function changeOne() {
-      obj.info.a += '1'
+      a.name = '123'
+      a.info.age = 2888
+      console.log(a);
     }
-    const { name, age } = toRefs(obj)
-    // setInterval(() => {
-    //   name.value += '啾啾丸'
-    //   // console.log(name.value);
-    // }, 1000);
-    // const router = useRouter()
-    // let nums = 123
-    // function goChild() {
-    //   router.push({ path: 'childRouter', query: { nums } })
-    // }
+
     return {
-      name,
-      age,
-      ...toRefs(obj),
+      data,
+      a,
       changeOne
-      // goChild,
     }
   }
 }
